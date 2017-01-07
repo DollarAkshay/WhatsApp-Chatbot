@@ -10,12 +10,18 @@ class Message():
     def __eq__(self, other):
         return self.message == other.message
 
+
+if os.name == "nt":
+    driverPath = "driver/chromedriver.exe"
+else :
+    driverPath = "driver/chromedriver"
+
 options = webdriver.ChromeOptions()
 options.add_argument("--user-data-dir=data/Training")
-driver = webdriver.Chrome(chrome_options=options)
-print("\nManually Open a New TAB\n")
+driver = webdriver.Chrome(chrome_options=options, executable_path=driverPath)
 driver.get('https://web.whatsapp.com')
-time.sleep(3)
+driver.execute_script("window.open('','_blank');")
+driver.switch_to_window(driver.window_handles[0])
 driver.switch_to_window(driver.window_handles[1])
 driver.get('http://www.square-bear.co.uk/mitsuku/nfchat.htm')
 driver.switch_to_window(driver.window_handles[0])
@@ -35,6 +41,7 @@ while True:
 
         newMessages = []
         for message in reversed(messageList):
+            bubbleText = None
             try:
                 bubbleText = message.find_element_by_class_name("message-chat").find_element_by_class_name("bubble")
             except :
@@ -102,18 +109,23 @@ while True:
                     responseBody = tag
                     break
 
-            lines = responseBody.text.split('\n')
+            start = responseBody.text.find("Μitsuku: ")
+            end = responseBody.text.find("You: ", 4)
             firstName = message.user.split(' ')[0]
-            responses.append("@"+firstName+" : "+lines[1][9:])
+            resp = responseBody.text[start+9:end-1]
+            print(repr(resp))
+            responses.append("@"+firstName+" : "+resp)
 
         replyQueue = []
-
         # Switch tabs and reply on whatsapp
         driver.switch_to_window(driver.window_handles[0])
         inputMessage = messageDiv.find_element_by_class_name('input')
 
         for response in responses:
-            inputMessage.send_keys(response)
+            lines = response.split('\n')
+            for line in lines:
+                inputMessage.send_keys(line)
+                inputMessage.send_keys(Keys.SHIFT, Keys.ENTER)
             driver.find_element_by_class_name('send-container').click()
         
 
