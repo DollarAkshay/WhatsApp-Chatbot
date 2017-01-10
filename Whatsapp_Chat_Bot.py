@@ -109,8 +109,8 @@ while True:
                     responseBody = tag
                     break
 
-            start = responseBody.text.find("Μitsuku: ")
-            end = responseBody.text.find("You: ", 4)
+            start = responseBody.text.find("Μitsuku:")
+            end = responseBody.text.find("You:", 4)
             firstName = message.user.split(' ')[0]
             resp = responseBody.text[start+9:end-1]
             print(repr(resp))
