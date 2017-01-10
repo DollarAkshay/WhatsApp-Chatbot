@@ -3,7 +3,7 @@ A simple Whatsapp chatbot that chats with a group or person using the web versio
 
 
 ## Dependencies
-To run the following python script you will need the [Selenium Webdriver](http://www.seleniumhq.org/projects/webdriver) for Python
+To run the following python script you will need the [Selenium Webdriver](http://www.seleniumhq.org/projects/webdriver) for Python and Google Chrome Browser
 
 ``pip install selenium``
 
