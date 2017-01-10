@@ -1,10 +1,8 @@
-# WhatsApp Chatbot <img src="http://i.imgur.com/bhJe078.png" width="40px" height="40px"/>
-
+# WhatsApp Chatbot &nbsp;<img src="http://i.imgur.com/bhJe078.png" width="30px" height="30px"/>
 A simple Whatsapp chatbot that chats with a group or person using the web version of [Whatsapp](https://web.whatsapp.com)
 
 
 ## Dependencies
-
 To run the following python script you will need the [Selenium Webdriver](http://www.seleniumhq.org/projects/webdriver) for Python
 
 ``pip install selenium``
@@ -21,3 +19,11 @@ Now ask your friend to send a message. All messages to the chat bot should start
 
 Example : `$Hello there.`
 
+<br>
+## Screenshots
+<img src="http://i.imgur.com/cCM9iMO.png">
+
+<br>
+## Whatsapp Policy
+
+Please note that Whatsapp does not encourage bots on their messaging service. Any mass advertising or spamming will lead to your account being banned. This is only for fun and experimental purposes. Use it at your own risk 
