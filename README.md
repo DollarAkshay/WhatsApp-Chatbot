@@ -3,7 +3,7 @@ A simple Whatsapp chatbot that chats with a group or person using the web versio
 
 <br>
 ## Dependencies
-You will require a recent version of Google Chrome and the drivers. The drivers are included in the `drivers` directory of this project.
+You will require a recent version of Google Chrome and the drivers. The drivers are included in the `drivers` directory of this project.<br>
 To run the following python script you will need the [Selenium Webdriver](http://www.seleniumhq.org/projects/webdriver) for Python
 
 ``pip3 install selenium``
