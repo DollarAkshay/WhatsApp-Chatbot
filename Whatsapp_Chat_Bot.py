@@ -12,12 +12,14 @@ class Message():
 
 
 if os.name == "nt":
-    driverPath = "driver/chromedriver.exe"
+    driverPath = "driver/chromedriver_2.24.exe"
+    dataPath = "C:\\Users\\Akshay L Aradhya\\AppData\\Local\\Google\\Chrome\\User Data\\ChatBot"
 else :
     driverPath = "driver/chromedriver"
+    dataPath = "Data/ChatBot"
 
 options = webdriver.ChromeOptions()
-options.add_argument("--user-data-dir=data/Training")
+options.add_argument("--user-data-dir="+dataPath)
 driver = webdriver.Chrome(chrome_options=options, executable_path=driverPath)
 driver.get('https://web.whatsapp.com')
 driver.execute_script("window.open('','_blank');")
