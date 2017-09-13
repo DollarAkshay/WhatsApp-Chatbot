@@ -36,7 +36,6 @@ input("Choose a chat on whatsapp and press enter : ")
 chatHistory = []
 replyQueue = []
 firstRun = True
-
 print("Starting...")
 
 while True:
