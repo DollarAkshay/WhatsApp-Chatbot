@@ -2,3 +2,4 @@ data/
 .vs/
 *.pyproj
 *.suo
+*.ini
