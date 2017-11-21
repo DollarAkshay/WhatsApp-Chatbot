@@ -1,5 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import sys
 import os
 import time
@@ -22,15 +24,15 @@ else:
     driverPath = "driver/chromedriver"
     dataPath = "Data/ChatBot"
 
+
 options = webdriver.ChromeOptions()
 options.add_argument("--user-data-dir=" + dataPath)
 driver = webdriver.Chrome(chrome_options=options, executable_path=driverPath)
 driver.get('https://web.whatsapp.com')
 driver.execute_script("window.open('','_blank');")
-driver.switch_to_window(driver.window_handles[0])
 driver.switch_to_window(driver.window_handles[1])
 driver.get('http://www.square-bear.co.uk/mitsuku/nfchat.htm')
-driver.switch_to_window(driver.window_handles[0])
+driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.TAB)
 
 input("Choose a chat on whatsapp and press enter : ")
 chatHistory = []
@@ -41,11 +43,11 @@ print("Starting...")
 
 while True:
     try:
+
         driver.switch_to_window(driver.window_handles[0])
         usersDiv = driver.find_element_by_id("side")
         messageDiv = driver.find_element_by_id("main")
-        messageList = messageDiv.find_element_by_class_name("message-list")
-        messageList = messageList.find_elements_by_class_name("msg")
+        messageList = messageDiv.find_elements_by_class_name("msg")
 
         newMessages = []
         for message in reversed(messageList):
@@ -118,7 +120,7 @@ while True:
                     responseBody = tag
                     break
 
-            start = responseBody.text.find("Mitsuku")
+            start = responseBody.text.find("Μitsuku")
             end = responseBody.text.find("You", 4)
             firstName = message.user.split(' ')[0]
             resp = responseBody.text[start + 10:end - 2]
@@ -128,16 +130,15 @@ while True:
         replyQueue = []
         # Switch tabs and reply on whatsapp
         driver.switch_to_window(driver.window_handles[0])
-        inputMessage = messageDiv.find_element_by_class_name('input')
+        inputMessage = messageDiv.find_element_by_class_name(
+            'pluggable-input-body')
 
         for response in responses:
             lines = response.split('\n')
             for line in lines:
                 inputMessage.send_keys(line)
                 inputMessage.send_keys(Keys.SHIFT, Keys.ENTER)
-                print("SE")
             inputMessage.send_keys(Keys.ENTER)
-            print("E")
 
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
